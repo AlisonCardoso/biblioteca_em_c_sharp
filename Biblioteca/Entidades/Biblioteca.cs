@@ -12,6 +12,7 @@ namespace Biblioteca
 		
 		public void EmprestarLivro(int idCliente, int idLivro)
 		{
+			try {
 			Livro livro = livros.Find(l => l.Id_livro == idLivro);
 			
 			
@@ -43,18 +44,26 @@ namespace Biblioteca
 		
 		Console.WriteLine("Livro Emprestado com Sucesso");
 		
+		} 
+		catch (Exception ex)
+		{
+			Console.WriteLine($"ocorreu um erro ao tentar empresrtar um livro: {ex.Message}");
 		}
+		}
+		
 		public void DevolverLivro(int idCliente, int idLivro)
 		{
-			Livro livro = livros.Find(l => l.Id_livro == idLivro);
+			try
+			
+			{
+				Livro livro = livros.Find(l => l.Id_livro == idLivro);
 			if( livro== null)
 			{
 				Console.WriteLine("Livro Não Encorntrado.");
 				return;
 			}
 			
-		Emprestimo emprestimo = emprestimos.Find(e=> e.ClienteEmprestimo.Id ==idCliente 
-		&& e.LivroEmprestado.Id_livro==idLivro);
+		Emprestimo emprestimo = emprestimos.Find(e=> e.ClienteEmprestimo.Id ==idCliente && e.LivroEmprestado.Id_livro==idLivro);
 		if(emprestimo== null)
 		{
 			Console.WriteLine("Cliente Não Encontrado");
@@ -66,9 +75,14 @@ namespace Biblioteca
 		Console.WriteLine("Livro devolvido com Sucesso");
 			
 		}
-		
+			catch( Exception ex)
+			{
+			Console.WriteLine($"ocorreu um erro ao tentar empresrtar um livro: {ex.Message}");
+		}
+					
 		
 		
 			
 	}
+}
 }
